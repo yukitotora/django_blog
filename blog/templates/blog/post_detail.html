@@ -29,7 +29,7 @@
           <p>投稿日時 : {{comment.post_date }}</p>
           <hr>
           <div>
-            {{ comment | linebreaks | urlize }}
+            {{ comment.text | linebreaks | urlize }}
           </div>
         </div>
       {% endfor %}

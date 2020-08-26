@@ -124,7 +124,7 @@ class Comment(models.Model):
 
     def __str__(self):
         # 管理サイトなどでの表示
-        return self.text[:20]
+        return self.text
 
     # post_dateでソートする
     class Meta:
