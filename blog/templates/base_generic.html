@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+{% load blog %}
+<html lang="ja">
+<head>
+  {% block title %}<title>Hoge Blog</title>{% endblock %}
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <!-- Add additional CSS in static file -->
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+  <div class="container-fluid">
+    {% block header %}
+    <div class="row">
+      <header class="header">
+        <h1>Hoge Blog</h1><br>
+        <p>ほげほげなブログ</p>
+      </header>
+    </div>
+    {% endblock %}
+    {% block navigationbar %}
+    <div class="row">
+      <nav>
+        <ul class="non-dot">
+          <li><a href="{% url 'index' %}">Home</a></li>
+          <li><a href="{% url 'blogs' %}">全記事</a></li>
+          <li><a href="{% url 'authors' %}">メンバー</a></li>
+        {% if user.is_authenticated %}
+          <li><a href="{% url 'logout'%}?next={{request.path}}">Logout</a></li>
+        {% else %}
+          <li><a href="{% url 'login'%}?next={{request.path}}">Login</a></li>
+        {% endif %}
+        </ul>
+      </nav>
+    </div>
+    {% endblock %}
+      <div class="container main-content">
+        <main class="row">
+          <div class="col-md-9 content-area">
+            {% block content %}{% endblock %}
+          </div>
+          <div class="col-md-3">
+            <aside>
+              <div class="sidelist">
+                {% if user.is_authenticated %}
+                  <ul>
+                    <li>User : {{ user.get_username }}</li>
+                {% else %}
+                    <li>新規会員登録は<a href="{% url 'signup' %}">こちら</a></li>
+                  </ul>
+                {% endif %}
+                <hr>
+                {% create_category_and_tag_list %}
+                <hr>
+                {% create_search_form request %}
+              </div>
+            </aside>
+          </div>
+        </main>
+      </div>
+
+        {% block pagination %}
+        {% if is_paginated %}
+            <div class="pagination">
+                <span class="page-links">
+                    {% if page_obj.has_previous %}
+                        <a href="{{ request.path }}?page={{ page_obj.previous_page_number }}">previous</a>
+                    {% endif %}
+                    <span class="page-current">
+                        Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+                    </span>
+                    {% if page_obj.has_next %}
+                        <a href="{{ request.path }}?page={{ page_obj.next_page_number }}">next</a>
+                    {% endif %}
+                </span>
+            </div>
+        {% endif %}
+        {% endblock %}
+  </div>
+</body>
+</html>

@@ -1,0 +1,41 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <article class="box">
+    <h1 class="box-title">{{ post.title }}</h1>
+
+    <p><strong>投稿日時 : </strong> {{ post.post_date }}</p>
+    <p><strong>投稿者 : </strong> <a href="{% url 'author-detail' post.author.pk %}">{{ post.author }}</a></p>
+    <p><strong>カテゴリ : </strong> {{ post.category }}</p>
+    <p><strong>タグ : </strong> {% for t in post.tag.all %}{{ t }},{% endfor %}</p>
+    <hr>
+    <div>
+      {{ post.content | linebreaks | urlize }}
+    </div>
+  </article>
+
+  {% if user.is_authenticated %}
+    <a class="btn btn-info" href="{% url 'comment-create' post.pk %}">コメントする</a>
+  {% else %}
+    <p>コメントするには<a href="{% url 'login'%}?next={{request.path}}">ログイン</a>してね</p>
+  {% endif %}
+
+  <section class="list-box">
+    <h2 class="box-title">コメント一覧</h2>
+    {% if post.comment_set.all %}
+      {% for comment in post.comment_set.all %}
+        <div class="box">
+          <p>投稿者 : {{ comment.author }}</p>
+          <p>投稿日時 : {{comment.post_date }}</p>
+          <hr>
+          <div>
+            {{ comment | linebreaks | urlize }}
+          </div>
+        </div>
+      {% endfor %}
+    {% else %}
+      <p>まだコメントはないよ</p>
+    {% endif %}
+  </section>
+
+{% endblock %}

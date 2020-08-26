@@ -1,0 +1,18 @@
+{% extends "base_generic.html" %}
+{% block title %}
+<title>Hoge Blog Home</title>
+{% endblock %}
+
+{% block content %}
+  <h1>Hoge Blog Home</h1>
+  <p>Hoge Blogにようこそ</p>
+  <hr>
+  <h2>コンテンツ</h2>
+  <p>ブログの状況:</p>
+  <ul>
+    <li><strong>記事数 : </strong> {{ num_blogs }}</li>
+    <li><strong>コメント数 : </strong> {{ num_comments }}</li>
+    <li><strong>メンバー数 : </strong> {{ num_authors }}</li>
+  </ul>
+  <p>あなたはこのページに {{ num_visits }}回訪れています。ありがとう!</p>
+{% endblock %}

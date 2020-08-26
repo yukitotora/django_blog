@@ -1,0 +1,13 @@
+<p>カテゴリ一覧</p>
+<ul>
+  {% for category in category_list %}
+    <li><a href="{% url 'post-category-list' category.pk %}">{{ category }}</a></li>
+  {% endfor %}
+</ul>
+
+<p>タグ一覧</p>
+<ul>
+  {% for tag in tag_list %}
+    <li><a href="{% url 'post-tag-list' tag.pk %}">{{ tag }}</a></li>
+  {% endfor %}
+</ul>

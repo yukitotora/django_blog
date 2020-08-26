@@ -1,0 +1,26 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <article class="box">
+    <h1 class="box-title">{{ author.name }}</h1>
+    <hr>
+    <div>
+      <h2 class="subtitle">自己紹介</h2><br>
+      {{ author.bio | linebreaks | urlize }}
+    </div>
+    <div>
+      <h2 class="subtitle">投稿した記事一覧</h2>
+      {% if author.post_set.all %}
+        <ul class="list">
+          {% for post in author.post_set.all %}
+          <li><a href="{% url 'blog-detail' post.pk %}">{{ post.title }}</a>({{ post.post_date }})</li>
+          {% endfor %}
+        </ul>
+      {% else %}
+        <p>まだ投稿した記事がありません</p>
+      {% endif %}
+    </div>
+
+  </article>
+
+{% endblock %}

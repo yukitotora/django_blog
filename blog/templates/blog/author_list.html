@@ -1,0 +1,17 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <article class="list-box">
+    <h1 class="box-title">メンバー一覧</h1>
+    {% if author_list %}
+    <ul class="list">
+      {% for author in author_list %}
+        <li>
+          <a href="{{ author.get_absolute_url }}">{{ author.name }}</a></li>
+      {% endfor %}
+    </ul>
+    {% else %}
+      <p>まだメンバーがいません.</p>
+    {% endif %}
+  </article>
+{% endblock %}

@@ -1,0 +1,6 @@
+{% extends "register/base.html" %}
+{% block content %}
+  <p>ログアウトしました!</p>
+  <p>再度ログインするには<a href="{% url 'login'%}">ここ</a>をクリックしてください.</p>
+  <p>ホームページに戻る場合は<a href="{% url 'index' %}">こちら</a></p>
+{% endblock %}

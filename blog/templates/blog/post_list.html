@@ -1,0 +1,17 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <article class="list-box">
+    <h1 class="box-title">ブログ記事一覧</h1>
+    {% if post_list %}
+    <ul class="list">
+      {% for post in post_list %}
+        <li>
+          <a href="{{ post.get_absolute_url }}">{{ post.title }}</a> ({{post.post_date}}) ――　<a href="{% url 'author-detail' post.author.pk %}">{{ post.author }}</a></li>
+      {% endfor %}
+    </ul>
+    {% else %}
+      <p>まだブログ記事がありません.</p>
+    {% endif %}
+  </article>
+{% endblock %}

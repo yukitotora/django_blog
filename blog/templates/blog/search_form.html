@@ -1,0 +1,37 @@
+<p class="menu-label">検索フォーム</p>
+<form action="{% url 'blogs' %}" method="GET">
+  <div class="field">
+    <div class="control">
+      キーワード : {{ form.key_word }}
+    </div>
+  </div>
+
+  <div class="field">
+    <div class="control">
+      <div class="select">
+        カテゴリの選択 : <br>
+        {{ form.category }}
+      </div>
+    </div>
+  </div>
+
+  <div class="field">
+    <div class="control">
+        <div class="select is-multiple">
+          タグの選択 : <br>
+          {{ form.tag }}
+        </div>
+    </div>
+  </div>
+
+  <div class="field">
+    <div class="control">
+      <div class="select">
+        投稿者 : <br>
+        {{ form.author }}
+      </div>
+    </div>
+  </div>
+
+  <button class="btn btn-info" type="submit">検索</button>
+</form>

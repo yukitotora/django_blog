@@ -1,0 +1,24 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+  {% for post in post_list %}
+    <p>この記事へのコメントだよ : <a href="{% url 'blog-detail' post.pk %}">{{ post.title }}</a></p>
+  {% endfor %}
+  <form action="" method="post">
+    {{ form.non_field_errors }}
+    {% for field in form %}
+      <div class="field">
+        <label class="label" for="{{ field.id_for_label }}">{{ field.label }}</label>
+        <div class="control">
+          {{ field }}
+          {% if field.help_text %}
+           <span class="helptext">{{ field.help_text }}</span>
+          {% endif %}
+        </div>
+        {{ field.errors }}
+      </div>
+    {% endfor %}
+    {% csrf_token %}
+    <button type="submit" class="btn btn-info">送信</button>
+  </form>
+{% endblock %}
