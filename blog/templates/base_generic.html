@@ -42,20 +42,18 @@
             {% block content %}{% endblock %}
           </div>
           <div class="col-md-3">
-            <aside>
-              <div class="sidelist">
+            <aside class="blog-sidebar">
                 {% if user.is_authenticated %}
                   <ul>
                     <li>User : {{ user.get_username }}</li>
                 {% else %}
-                    <li>新規会員登録は<a href="{% url 'signup' %}">こちら</a></li>
+                    <li class="non-list">新規会員登録は<a href="{% url 'signup' %}">こちら</a></li>
                   </ul>
                 {% endif %}
                 <hr>
                 {% create_category_and_tag_list %}
                 <hr>
                 {% create_search_form request %}
-              </div>
             </aside>
           </div>
         </main>
